@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sunshine Burger | Fresh & Tasty</title>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --orange: #c7653b;
+      --orange-dark: #a84d2b;
+      --cream: #f7f1e8;
+      --ink: #29231f;
+      --muted: #786e66;
+      --yellow: #e5bd73;
+      --green: #617c5a;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #fffdf9;
+    }
+
+    .navbar {
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 4px 24px rgba(45, 27, 15, .07);
+    }
+    .navbar-brand {
+      color: var(--ink);
+      font-size: 1.35rem;
+      letter-spacing: -.5px;
+    }
+    .brand-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 7px 18px rgba(22,122,90,.25);
+    }
+    .navbar-collapse { flex-basis: 100%; flex-grow: 1; align-items: center; }\n    @media (min-width: 992px) { .navbar-collapse { display: flex !important; flex-basis: auto; } }\n    @media (max-width: 991.98px) { .navbar-collapse { display: flex; flex-direction: column; align-items: stretch; padding-top: .8rem; } .navbar-nav { align-items: stretch !important; } }\n    .navbar .nav-link {
+      color: #514943;
+      font-weight: 600;
+      padding: .7rem .85rem !important;
+      transition: color .2s ease;
+    }
+    .navbar .nav-link:hover, .navbar .nav-link:focus { color: var(--orange); }
+    .btn-orange {
+      background: var(--orange);
+      border: 1px solid var(--orange);
+      color: #fff;
+      border-radius: 999px;
+      padding: .75rem 1.25rem;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+    .btn-orange:hover {
+      background: var(--orange-dark);
+      border-color: var(--orange-dark);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 9px 22px rgba(22,122,90,.22);
+    }
+    .btn-outline-orange {
+      border: 1.5px solid var(--orange);
+      color: var(--orange-dark);
+      border-radius: 999px;
+      padding: .72rem 1.2rem;
+      font-weight: 700;
+    }
+    .btn-outline-orange:hover { background: var(--orange); color: #fff; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0 90px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255,200,87,.30), transparent 23%),
+        radial-gradient(circle at 10% 90%, rgba(22,122,90,.10), transparent 25%),
+        linear-gradient(135deg, #f7f1e8 0%, #fffdf9 65%, #f6e8dc 100%);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--orange-dark);
+      background: #f4e2d5;
+      border-radius: 999px;
+      padding: .48rem .9rem;
+      font-size: .83rem;
+      font-weight: 800;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 4.6rem);
+      line-height: 1.08;
+      font-weight: 850;
+      letter-spacing: -2px;
+      max-width: 680px;
+    }
+    .text-orange { color: var(--orange); }
+    .hero-copy { color: var(--muted); max-width: 540px; font-size: 1.08rem; line-height: 1.8; }
+    .hero-art {
+      min-height: 370px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .hero-circle {
+      width: min(350px, 80vw);
+      height: min(350px, 80vw);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #e3a477, #bd5c36);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 24px 60px rgba(22, 122, 90, .20);
+      position: relative;
+    }
+    .hero-burger {
+      font-size: clamp(8rem, 17vw, 12rem);
+      color: #fff;
+      text-shadow: 0 10px 0 rgba(123, 51, 15, .10);
+      transform: rotate(-8deg);
+    }
+    .floating-badge {
+      position: absolute;
+      background: #fffdf9;
+      border-radius: 18px;
+      padding: .85rem 1rem;
+      box-shadow: 0 12px 35px rgba(40, 25, 15, .13);
+      font-weight: 800;
+    }
+    .badge-top { top: 25px; right: 0; }
+    .badge-bottom { bottom: 25px; left: 0; }
+    .badge-top i, .badge-bottom i { color: var(--orange); }
+
+    .trust-strip { border-block: 1px solid #f1e8df; background: #fffdf9; }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: .7rem; padding: 1.25rem .5rem; }
+    .trust-item i { color: var(--orange); font-size: 1.35rem; }
+    .trust-item span { color: #5f5751; font-weight: 700; font-size: .93rem; }
+
+    .section-padding { padding: 78px 0; }
+    .section-kicker {
+      color: var(--orange-dark);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+    .section-title { font-weight: 850; letter-spacing: -1px; font-size: clamp(2rem, 4vw, 2.8rem); }
+    .section-subtitle { color: var(--muted); max-width: 620px; margin-inline: auto; line-height: 1.7; }
+
+    .food-card {
+      border: 1px solid #f2e8df;
+      border-radius: 22px;
+      background: #fffdf9;
+      overflow: hidden;
+      height: 100%;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .food-card:hover { transform: translateY(-7px); box-shadow: 0 18px 38px rgba(51, 31, 18, .10) !important; }
+    .food-art {
+      height: 180px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #f6e8dc, #f1dfd0);
+      position: relative;
+      overflow: hidden;
+    }
+    .food-art::before, .food-art::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(22,122,90,.15);
+      width: 190px;
+      height: 190px;
+    }
+    .food-art::after { width: 140px; height: 140px; }
+    .food-art i { z-index: 1; font-size: 5.7rem; color: var(--orange); filter: drop-shadow(0 9px 5px rgba(100,50,20,.12)); transition: transform .3s ease; }
+    .food-card:hover .food-art i { transform: scale(1.09) rotate(-5deg); }
+    .food-art.green { background: linear-gradient(135deg, #f6e8dc, #d8e0cf); }
+    .food-art.green i { color: var(--green); }
+    .food-art.yellow { background: linear-gradient(135deg, #f8edda, #ecd9ad); }
+    .food-art.yellow i { color: #a8874c; }
+    .food-art.pink { background: linear-gradient(135deg, #f7e8df, #f0d8cc); }
+    .food-art.pink i { color: #b86b55; }
+    .food-art.purple { background: linear-gradient(135deg, #f2e9ff, #ddccff); }
+    .food-art.purple i { color: #80718a; }
+    .food-art.blue { background: linear-gradient(135deg, #e5f5ff, #c6e8ff); }
+    .food-art.blue i { color: #6c8a8a; }
+    .food-body { padding: 1.4rem; }
+    .food-body h3 { font-size: 1.15rem; font-weight: 800; }
+    .food-body p { min-height: 48px; color: var(--muted); font-size: .94rem; }
+    .price { color: var(--orange-dark); font-size: 1.25rem; font-weight: 850; }
+    .tag {
+      background: #f6e8dc;
+      color: #a84d2b;
+      border-radius: 999px;
+      font-size: .73rem;
+      padding: .3rem .65rem;
+      font-weight: 800;
+    }
+
+    .deals-section { background: var(--cream); }
+    .deal-card {
+      height: 100%;
+      padding: 1.8rem;
+      border-radius: 24px;
+      background: #fffdf9;
+      border: 1px solid #f0e5d9;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .deal-card:hover { transform: translateY(-5px); box-shadow: 0 18px 35px rgba(51,31,18,.09); }
+    .deal-icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: #f6e8dc;
+      color: var(--orange);
+      font-size: 1.8rem;
+      margin-bottom: 1.25rem;
+    }
+    .deal-card h3 { font-size: 1.2rem; font-weight: 850; }
+    .deal-card p { color: var(--muted); }
+    .deal-card.featured { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .deal-card.featured p { color: #d5ccc5; }
+    .deal-card.featured .deal-icon { background: var(--orange); color: #fff; }
+    .deal-card.featured .price { color: var(--yellow); }
+
+    .review-card {
+      border: 1px solid #f1e8df;
+      border-radius: 20px;
+      padding: 1.7rem;
+      height: 100%;
+      background: #fffdf9;
+    }
+    .review-stars { color: #b18a4d; letter-spacing: 2px; }
+    .quote-icon { color: #d9b9a0; font-size: 1.7rem; }
+    .review-card p { color: var(--muted); line-height: 1.8; }
+    .review-avatar {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #f4e2d5;
+      color: var(--orange-dark);
+      font-weight: 850;
+    }
+
+    .cta {
+      background: linear-gradient(120deg, #ff642d, #a84d2b);
+      color: #fff;
+      border-radius: 28px;
+      padding: clamp(2rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::after {
+      content: "\f805";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 4%;
+      bottom: -35%;
+      font-size: 15rem;
+      color: rgba(255,255,255,.10);
+      pointer-events: none;
+    }
+    .cta p { color: rgba(255,255,255,.86); max-width: 570px; }
+    .btn-white { background: #fffdf9; color: var(--orange-dark); border-radius: 999px; padding: .8rem 1.3rem; font-weight: 800; }
+    .btn-white:hover { background: #f6e8dc; color: var(--orange-dark); }
+
+    footer { background: #211d1a; color: #e4d9cf; }
+    footer h5, footer h6 { color: #fff; font-weight: 800; }
+    footer p, footer a { color: #c9bdb2; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: #e8c46a; }
+    .footer-brand-icon {
+      width: 42px; height: 42px; display: inline-grid; place-items: center;
+      background: var(--orange); color: #fff; border-radius: 13px;
+    }
+    .social-link {
+      display: inline-grid; place-items: center; width: 42px; height: 42px;
+      border-radius: 50%; border: 1px solid #6a584b; transition: .2s ease;
+    }
+    .social-link:hover { background: var(--orange); color: #fff; border-color: var(--orange); transform: translateY(-3px); }
+    .footer-input { background: #352d28; border: 1px solid #62554a; color: #fff; }
+    .footer-input::placeholder { color: #b7aaa0; }
+    .footer-input:focus { background: #352d28; color: #fff; border-color: var(--orange); box-shadow: 0 0 0 .2rem rgba(22,122,90,.15); }
+    .footer-bottom { border-top: 1px solid #443a32; color: #b7aaa0; }
+
+    @media (max-width: 767.98px) {
+      .hero { padding: 65px 0 55px; text-align: center; }
+      .hero-copy { margin-inline: auto; }
+      .hero-art { min-height: 310px; margin-top: 1.5rem; }
+      .hero-circle { width: 260px; height: 260px; }
+      .hero-burger { font-size: 8rem; }
+      .badge-top { right: 0; top: 8px; }
+      .badge-bottom { left: 0; bottom: 8px; }
+      .section-padding { padding: 58px 0; }
+      .trust-item { padding: .8rem .25rem; }
+      .trust-item span { font-size: .78rem; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#top">
+        <span class="brand-icon"><i class="fa-solid fa-burger"></i></span>
+        <span>Sunshine<span class="text-orange">Burger</span></span>
+      </a>
+      <div class="navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center me-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#top"><i class="fa-solid fa-house me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu"><i class="fa-solid fa-utensils me-1"></i>Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#deals"><i class="fa-solid fa-fire me-1"></i>Deals</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews"><i class="fa-solid fa-star me-1"></i>Reviews</a></li>
+        </ul>
+        <a class="btn btn-orange btn-sm mt-2 mt-lg-0" href="#menu"><i class="fa-solid fa-bag-shopping me-2"></i>Order Now</a>
+      </div>
+    </div>
+  </nav>
+
+  
+  <header class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <span class="eyebrow mb-4"><i class="fa-solid fa-bolt"></i> Freshly made, always delicious</span>
+          <h1 class="mb-4">Big flavour.<br><span class="text-orange">Bigger smiles.</span></h1>
+          <p class="hero-copy mb-4">Welcome to Sunshine Burger, where every bite is packed with flavour. Find your favourite burger, discover a tasty combo, and make your day delicious.</p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+            <a href="#menu" class="btn btn-orange"><i class="fa-solid fa-utensils me-2"></i>Explore Menu</a>
+            <a href="#deals" class="btn btn-outline-orange"><i class="fa-solid fa-fire me-2"></i>View Deals</a>
+          </div>
+          <div class="d-flex flex-wrap gap-4 mt-4 justify-content-center justify-content-lg-start text-secondary small">
+            <span><i class="fa-solid fa-circle-check text-success me-1"></i> Fresh ingredients</span>
+            <span><i class="fa-solid fa-heart text-danger me-1"></i> Made with care</span>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-art">
+            <div class="hero-circle"><i class="fa-solid fa-burger hero-burger"></i></div>
+            <div class="floating-badge badge-top"><i class="fa-solid fa-star me-2"></i>Fan favourite</div>
+            <div class="floating-badge badge-bottom"><i class="fa-solid fa-clock me-2"></i>Quick & tasty</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <section class="trust-strip">
+    <div class="container">
+      <div class="row row-cols-2 row-cols-md-4">
+        <div class="col"><div class="trust-item"><i class="fa-solid fa-leaf"></i><span>Fresh Ingredients</span></div></div>
+        <div class="col"><div class="trust-item"><i class="fa-solid fa-fire-burner"></i><span>Made to Order</span></div></div>
+        <div class="col"><div class="trust-item"><i class="fa-solid fa-face-smile"></i><span>Happy Customers</span></div></div>
+        <div class="col"><div class="trust-item"><i class="fa-solid fa-heart"></i><span>Made with Love</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section-padding" id="menu">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-kicker mb-2">Made fresh for you</div>
+        <h2 class="section-title mb-3">Explore Our <span class="text-orange">Menu</span></h2>
+        <p class="section-subtitle">From timeless classics to crispy favourites, there is something delicious for everyone.</p>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        <div class="col">
+          <article class="food-card shadow-sm">
+            <div class="food-art"><i class="fa-solid fa-burger"></i></div>
+            <div class="food-body">
+              <div class="d-flex justify-content-between align-items-center gap-2 mb-2"><h3 class="mb-0">Classic Beef Burger</h3><span class="tag">BESTSELLER</span></div>
+              <p>Juicy beef patty with melted cheese, crisp lettuce and our signature sauce.</p>
+              <div class="d-flex align-items-center justify-content-between"><span class="price">Rs. 299</span><a class="btn btn-orange btn-sm" href="#contact" aria-label="Order Classic Beef Burger"><i class="fa-solid fa-plus me-1"></i>Order</a></div>
+            </div>
+          </article>
+        </div>
+        <div class="col">
+          <article class="food-card shadow-sm">
+            <div class="food-art pink"><i class="fa-solid fa-drumstick-bite"></i></div>
+            <div class="food-body">
+              <h3>Crispy Chicken Burger</h3>
+              <p>Golden crispy chicken, creamy mayo and crunchy pickles in a soft bun.</p>
+              <div class="d-flex align-items-center justify-content-between"><span class="price">Rs. 249</span><a class="btn btn-orange btn-sm" href="#contact" aria-label="Order Crispy Chicken Burger"><i class="fa-solid fa-plus me-1"></i>Order</a></div>
+            </div>
+          </article>
+        </div>
+        <div class="col">
+          <article class="food-card shadow-sm">
+            <div class="food-art green"><i class="fa-solid fa-leaf"></i></div>
+            <div class="food-body">
+              <h3>Veggie Delight</h3>
+              <p>A flavourful veggie patty with fresh greens, cheddar and tangy sauce.</p>
+              <div class="d-flex align-items-center justify-content-between"><span class="price">Rs. 199</span><a class="btn btn-orange btn-sm" href="#contact" aria-label="Order Veggie Delight"><i class="fa-solid fa-plus me-1"></i>Order</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section-padding deals-section" id="deals">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-kicker mb-2">More bites, more savings</div>
+        <h2 class="section-title mb-3">Today's <span class="text-orange">Special Deals</span></h2>
+        <p class="section-subtitle">Bring your appetite and enjoy a little extra value with our favourite combos.</p>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <article class="deal-card">
+            <div class="deal-icon"><i class="fa-solid fa-burger"></i></div>
+            <h3>Double Deal Combo</h3>
+            <p>2 beef burgers, crispy fries and 2 refreshing drinks.</p>
+            <div class="d-flex justify-content-between align-items-center mt-4"><span class="price">Rs. 499</span><a class="btn btn-outline-orange btn-sm" href="#contact">Grab Deal <i class="fa-solid fa-arrow-right ms-1"></i></a></div>
+          </article>
+        </div>
+        <div class="col">
+          <article class="deal-card featured">
+            <div class="deal-icon"><i class="fa-solid fa-users"></i></div>
+            <span class="badge rounded-pill text-bg-warning mb-3">FAMILY FAVOURITE</span>
+            <h3>Family Feast</h3>
+            <p>4 delicious burgers, 2 servings of fries and 4 drinks.</p>
+            <div class="d-flex justify-content-between align-items-center mt-4"><span class="price">Rs. 999</span><a class="btn btn-white btn-sm" href="#contact">Grab Deal <i class="fa-solid fa-arrow-right ms-1"></i></a></div>
+          </article>
+        </div>
+        <div class="col">
+          <article class="deal-card">
+            <div class="deal-icon"><i class="fa-solid fa-child-reaching"></i></div>
+            <h3>Kids Mini Meal</h3>
+            <p>A mini burger, a small serving of fries and a juice.</p>
+            <div class="d-flex justify-content-between align-items-center mt-4"><span class="price">Rs. 199</span><a class="btn btn-outline-orange btn-sm" href="#contact">Grab Deal <i class="fa-solid fa-arrow-right ms-1"></i></a></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section-padding" id="reviews">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-kicker mb-2">A little love from our customers</div>
+        <h2 class="section-title mb-3">What People <span class="text-orange">Say</span></h2>
+        <p class="section-subtitle">Good food is even better when it brings a smile.</p>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col"><article class="review-card"><div class="d-flex justify-content-between mb-3"><i class="fa-solid fa-quote-left quote-icon"></i><span class="review-stars">★★★★★</span></div><p>“Absolutely loved the Double Deal Combo! The beef was juicy and the fries were crispy. Will order again!”</p><div class="d-flex align-items-center gap-3 mt-4"><div class="review-avatar">AM</div><div><h6 class="fw-bold mb-0">Ayesha M.</h6><small class="text-secondary">Happy customer</small></div></div></article></div>
+        <div class="col"><article class="review-card"><div class="d-flex justify-content-between mb-3"><i class="fa-solid fa-quote-left quote-icon"></i><span class="review-stars">★★★★★</span></div><p>“Great customer service and even better burgers. The Veggie Delight was a hit!”</p><div class="d-flex align-items-center gap-3 mt-4"><div class="review-avatar">FA</div><div><h6 class="fw-bold mb-0">Farhan A.</h6><small class="text-secondary">Happy customer</small></div></div></article></div>
+        <div class="col"><article class="review-card"><div class="d-flex justify-content-between mb-3"><i class="fa-solid fa-quote-left quote-icon"></i><span class="review-stars">★★★★★</span></div><p>“My kids loved the Mini Meal! It’s the perfect portion and very affordable.”</p><div class="d-flex align-items-center gap-3 mt-4"><div class="review-avatar">SK</div><div><h6 class="fw-bold mb-0">Sana K.</h6><small class="text-secondary">Happy customer</small></div></div></article></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container pb-5" id="contact">
+    <div class="cta">
+      <div class="row align-items-center g-4 position-relative" style="z-index:1">
+        <div class="col-lg-8">
+          <div class="section-kicker text-white mb-2">Your next favourite bite awaits</div>
+          <h2 class="section-title mb-3">Hungry? Let's fix that.</h2>
+          <p class="mb-0">Choose your favourite from our menu and treat yourself to something delicious today.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end"><a href="#menu" class="btn btn-white"><i class="fa-solid fa-burger me-2"></i>Choose Your Burger</a></div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="pt-5">
+    <div class="container">
+      <div class="row gy-4 pb-5">
+        <div class="col-md-5 col-lg-4">
+          <a class="d-inline-flex align-items-center gap-2 mb-3 fw-bold fs-5" href="#top">
+            <span class="footer-brand-icon"><i class="fa-solid fa-burger"></i></span>
+            <span>Sunshine Burger</span>
+          </a>
+          <p class="small">Fresh flavours, friendly service and feel-good food. Thanks for stopping by!</p>
+          <p class="small mb-2"><i class="fa-solid fa-location-dot me-2 text-orange"></i>123 Sunshine Street, Your City</p>
+          <p class="small"><i class="fa-solid fa-phone me-2 text-orange"></i>+92 98765 43210</p>
+        </div>
+        <div class="col-md-3 col-lg-4">
+          <h6 class="mb-3">Quick Links</h6>
+          <div class="d-flex flex-column gap-2 small">
+            <a href="#top">Home</a><a href="#menu">Our Menu</a><a href="#deals">Special Deals</a><a href="#reviews">Customer Reviews</a>
+          </div>
+          <div class="d-flex gap-2 mt-4">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h6 class="mb-3">Get Updates</h6>
+          <p class="small">Join our mailing list for new menu items and special offers.</p>
+          <form class="d-flex gap-2" action="#" method="get">
+            <label class="visually-hidden" for="emailInput">Email address</label>
+            <input id="emailInput" class="form-control footer-input" type="email" placeholder="Your email address" required>
+            <button class="btn btn-orange flex-shrink-0" type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+          <div class="small mt-2 text-secondary">Subscribe form design preview (backend not connected).</div>
+        </div>
+      </div>
+      <div class="footer-bottom py-3 d-flex flex-column flex-sm-row justify-content-between gap-2 small">
+        <span>© 2026 Sunshine Burger. All rights reserved.</span>
+        <span>Made with <i class="fa-solid fa-heart text-danger"></i> for burger lovers.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
